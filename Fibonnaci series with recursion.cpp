@@ -15,8 +15,8 @@ int main()
 	int n,x;
 	printf("Enter The number:");
 	scanf("%d",&n);
-    for(int i=0;i<=n;i++){
+    for(int i=0;i<n;i++){
 	x=fib(i);
-	printf("%d",x);
+	printf("%d\t",x);
 	}
 }
