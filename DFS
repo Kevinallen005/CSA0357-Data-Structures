@@ -1,0 +1,83 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+// Structure of binary tree,
+struct node
+{
+    int nodeData;
+    struct node *leftChild;
+    struct node *rightChild;
+};
+struct node *newNode(int nodeData)
+{
+    struct node *node = (struct node *)malloc(sizeof(struct node));
+    node->nodeData = nodeData;
+    node->leftChild = NULL;
+    node->rightChild = NULL;
+    return (node);
+}
+
+void postOrderDFS(struct node *node)
+{
+    if (node == NULL)
+        return;
+
+    postOrderDFS(node->leftChild);
+    postOrderDFS(node->rightChild);
+    printf("%d ", node->nodeData);
+}
+
+void inOrderDFS(struct node *node)
+{
+   
+    if (node == NULL)
+        return;
+
+    inOrderDFS(node->leftChild);
+    printf("%d ", node->nodeData);
+    inOrderDFS(node->rightChild);
+}
+
+void preOrderDFS(struct node *node)
+{
+   
+    if (node == NULL)
+        return;
+
+    printf("%d ", node->nodeData);
+    preOrderDFS(node->leftChild);
+    preOrderDFS(node->rightChild);
+}
+
+int main()
+{
+    struct node *root = newNode(8);
+    root->leftChild = newNode(7);
+    root->rightChild = newNode(2);
+    root->rightChild->leftChild = newNode(15);
+    root->rightChild->rightChild = newNode(12);
+    root->leftChild->rightChild = newNode(6);
+   int ch;
+    printf("Enter Your Choice\n");
+    printf("Preorder Depth First Search: Press 1\n");
+    printf("Inorder Depth First Search: Press 2\n");
+    printf("Postorder Depth First Search: Press 3\n");
+    printf("Choice: ");
+    scanf("%d", &ch);
+    switch (ch)
+    {
+    case 1:
+        preOrderDFS(root);
+        break;
+    case 2:
+        inOrderDFS(root);
+        break;
+    case 3:
+        postOrderDFS(root);
+        break;
+    default:
+        printf("Enter a valid choice\n");
+        break;
+    }
+    return 0;
+}
